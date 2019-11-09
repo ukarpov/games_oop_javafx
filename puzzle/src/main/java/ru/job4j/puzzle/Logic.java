@@ -72,7 +72,7 @@ public class Logic {
         int[][] table = this.convert();
         boolean result = false;
 
-        for (int row = 0; row < table.length; row++) {
+        for (int row = 0; row < table.length && !result; row++) {
             if (table[row][row] == 1) {
                 int rowXCount = 0;
                 int colXCount = 0;
@@ -87,7 +87,6 @@ public class Logic {
                 if (rowXCount == table.length || colXCount == table.length) {
                     result = true;
                 }
-                break;
             }
         }
         return result;
