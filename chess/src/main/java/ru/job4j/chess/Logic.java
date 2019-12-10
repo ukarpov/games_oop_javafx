@@ -28,15 +28,28 @@ public class Logic {
             Cell[] steps = null;
             try {
                 steps = this.figures[index].way(source, dest);
-            } catch (Exception e) {
+            } catch (IllegalStateException e) {
                 steps = new Cell[0];
             }
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest) && !isFigureOnWay(steps)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
         }
         return rst;
+    }
+
+    private boolean isFigureOnWay(Cell[] way) {
+        boolean result = false;
+
+        for (Cell c : way) {
+            if (this.findBy(c) > 0 ) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 
     public void clean() {
